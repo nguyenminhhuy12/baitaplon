@@ -176,7 +176,7 @@
             .then(data => {
                 if (data.success) {
                     alert("Đặt vé thành công!");
-                    window.location.href = "/trang-thanh-cong"; // Chuyển hướng sau khi đặt vé
+                    window.location.href = "{{ route('home') }}"; // Chuyển hướng sau khi đặt vé
                 } else {
                     alert(data.error);
                 }

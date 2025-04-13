@@ -34,7 +34,7 @@ class BookingController extends Controller
 
 
     // Xử lý đặt vé
-    public function datVe(Request $request)
+    public function store(Request $request)
 {
     try {
         $validated = $request->validate([
