@@ -160,7 +160,11 @@
                 return;
             }
 
-            // Gửi dữ liệu lên server bằng Fetch API
+            // Hiện confirm
+            const xacNhan = confirm("Bạn có chắc chắn muốn đặt vé không?");
+            if (!xacNhan) return; // Nếu bấm Cancel thì không làm gì cả
+
+            // Nếu xác nhận → gửi dữ liệu lên server bằng Fetch
             fetch("{{ route('dat-ve') }}", {
                 method: "POST",
                 headers: {
@@ -168,15 +172,15 @@
                     "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
                 },
                 body: JSON.stringify({
-                    ma_lich_chieu: maLichChieuDangChon, // Dùng giá trị đã lưu
-                    ghe_da_chon: selectedSeats.split(",") // Chuyển chuỗi thành mảng
+                    ma_lich_chieu: maLichChieuDangChon,
+                    ghe_da_chon: selectedSeats.split(",")
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
                     alert("Đặt vé thành công!");
-                    window.location.href = "{{ route('home') }}"; // Chuyển hướng sau khi đặt vé
+                    window.location.href = "{{ route('home') }}";
                 } else {
                     alert(data.error);
                 }
@@ -186,6 +190,7 @@
                 alert("Có lỗi xảy ra, vui lòng thử lại!");
             });
         });
+
     });
 
 
